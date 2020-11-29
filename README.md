@@ -1,6 +1,28 @@
-# snowpack-plugin-starter-template
+# snowpack-plugin-angular
 
-Blank template to easily author a Snowpack template.
+This plugin lets you use [Angular](https://angular.io) with [Snowpack](https://snowpack.dev).
 
-- `npm run build`: Build the template
-- `npm run deploy`: Publish the template to npm using np
+When developing or building your site with Snowpack, this plugin will run Angular's `ngc` CLI in your project and pipe the output through Snowpack.
+
+## Usage
+
+```bash
+npm i --save-dev snowpack-plugin-angular
+```
+
+Then add the plugin to your Snowpack config:
+
+```js
+// snowpack.config.js
+
+module.exports = {
+  plugins: ["snowpack-plugin-angular"],
+};
+```
+
+## Plugin Options
+
+| Name       |   Type   | Description                                                                                                                                                                                    |
+| :--------- | :------: | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `ngcArgs`  | `string` | Optional arguments to pass to the `ngc` CLI. For example, you can configure a custom project directory (with a custom `tsconfig.json` file) using `ngcArgs: "--project ./your/custom/path"`.   |
+| `ngccArgs` | `string` | Optional arguments to pass to the `ngcc` CLI. For example, you can configure a custom project directory (with a custom `tsconfig.json` file) using `ngcArgs: "--tsconfig ./your/custom/path"`. |

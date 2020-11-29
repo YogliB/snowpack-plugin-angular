@@ -1,25 +1,21 @@
 {
+  "version": "0.0.1",
+  "name": "snowpack-plugin-angular",
+  "main": "plugin.js",
   "license": "MIT",
-  "scripts": {
-    "build": "pika build",
-    "deploy": "pika publish",
-    "version": "npm run build"
+  "homepage": "https://github.com/YogliB/snowpack-plugin-angular#readme",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/YogliB/snowpack-plugin-angular.git"
   },
-  "@pika/pack": {
-    "pipeline": [
-      [
-        "@pika/plugin-ts-standard-pkg"
-      ],
-      [
-        "@pika/plugin-build-node"
-      ]
-    ]
+  "publishConfig": {
+    "access": "public"
   },
-  "devDependencies": {
-    "@pika/pack": "^0.5.0",
-    "@pika/plugin-build-node": "^0.9.2",
-    "@pika/plugin-ts-standard-pkg": "^0.9.2",
-    "snowpack": "^2.6.4",
-    "typescript": "^3.9.7"
+  "peerDependencies": {
+    "@angular/compiler-cli": "^11.0.0"
+  },
+  "dependencies": {
+    "execa": "4.1.0",
+    "npm-run-path": "4.0.1"
   }
 }

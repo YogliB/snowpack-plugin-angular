@@ -43,6 +43,14 @@ function angularPlugin(_, { ngcArgs, ngccArgs } = {}) {
         }
       );
 
+      execa.commandSync(`ngc ${ngcArgs || "--project ./tsconfig.app.json"}`, {
+        env: npmRunPath.env(),
+        extendEnv: true,
+        windowsHide: false,
+        cwd,
+        stdio: "inherit",
+      });
+
       return workerPromise;
     },
   };

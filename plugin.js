@@ -6,6 +6,7 @@ function angularPlugin(_, { ngcArgs, ngccArgs } = {}) {
   return {
     name: "snowpack-plugin-angular",
     async run({ isDev, log }) {
+      // START run `ngc` in watch mode
       const workerPromise = execa.command(
         `ngc ${ngcArgs || "--project ./tsconfig.app.json"} ${
           isDev ? "--watch" : ""
@@ -31,7 +32,9 @@ function angularPlugin(_, { ngcArgs, ngccArgs } = {}) {
 
       stdout && stdout.on("data", dataListener);
       stderr && stderr.on("data", dataListener);
+      // END run `ngc` in watch mode
 
+      // run `ngcc`
       execa.commandSync(
         `ngcc ${ngccArgs || "--tsconfig ./tsconfig.app.json"}`,
         {
@@ -43,6 +46,7 @@ function angularPlugin(_, { ngcArgs, ngccArgs } = {}) {
         }
       );
 
+      // copy `ngcc`-processed files to `web_modules`
       execa.commandSync("snowpack install", {
         env: npmRunPath.env(),
         extendEnv: true,
@@ -51,6 +55,19 @@ function angularPlugin(_, { ngcArgs, ngccArgs } = {}) {
         stdio: "inherit",
       });
 
+      // move `web_modules` to `.cache` directory
+      const srcDir = "web_modules";
+      const destDir = `node_modules/.cache/snowpack/development`;
+
+      fse.moveSync(srcDir, destDir, function (err) {
+        if (err) {
+          console.error(err);
+        } else {
+          console.log("success!");
+        }
+      });
+
+      // run `ngc` once before --watch mode
       execa.commandSync(`ngc ${ngcArgs || "--project ./tsconfig.app.json"}`, {
         env: npmRunPath.env(),
         extendEnv: true,

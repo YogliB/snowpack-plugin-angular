@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [0.0.2] - 2020-11-30
 
+### Added
+
+- Run `snowpack install` after running `ngcc` to update `web_modules`.
+
+## [0.0.2] - 2020-11-30
+
 ### Changed
 
 - Made `ngc` run once before going to watch mode.

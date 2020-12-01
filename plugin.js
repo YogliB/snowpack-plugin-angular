@@ -43,6 +43,14 @@ function angularPlugin(_, { ngcArgs, ngccArgs } = {}) {
         }
       );
 
+      execa.commandSync("snowpack install", {
+        env: npmRunPath.env(),
+        extendEnv: true,
+        windowsHide: false,
+        cwd,
+        stdio: "inherit",
+      });
+
       execa.commandSync(`ngc ${ngcArgs || "--project ./tsconfig.app.json"}`, {
         env: npmRunPath.env(),
         extendEnv: true,

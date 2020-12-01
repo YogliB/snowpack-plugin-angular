@@ -61,7 +61,8 @@ function angularPlugin(_, { ngcArgs, ngccArgs } = {}) {
       const destDir = `node_modules/.cache/snowpack/development`;
 
       fse.rmdirSync(destDir, { recursive: true });
-      fse.moveSync(srcDir, destDir, { overwrite: true });
+      fse.copySync(srcDir, destDir);
+      fse.rmdirSync(srcDir, { recursive: true });
 
       // run `ngc` once before --watch mode
       execa.commandSync(`ngc ${ngcArgs || "--project ./tsconfig.app.json"}`, {

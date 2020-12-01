@@ -60,6 +60,7 @@ function angularPlugin(_, { ngcArgs, ngccArgs } = {}) {
       const srcDir = "web_modules";
       const destDir = `node_modules/.cache/snowpack/development`;
 
+      fse.rmdirSync(destDir, { recursive: true });
       fse.moveSync(srcDir, destDir, { overwrite: true });
 
       // run `ngc` once before --watch mode

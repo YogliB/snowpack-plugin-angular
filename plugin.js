@@ -1,6 +1,7 @@
 const execa = require("execa");
 const npmRunPath = require("npm-run-path");
 const cwd = process.cwd();
+const fse = require("fs-extra");
 
 function angularPlugin(_, { ngcArgs, ngccArgs } = {}) {
   return {

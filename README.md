@@ -22,7 +22,6 @@ module.exports = {
 
 ## Plugin Options
 
-| Name       |   Type   | Description                                                                                                                                                                                    |
-| :--------- | :------: | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `ngcArgs`  | `string` | Optional arguments to pass to the `ngc` CLI. For example, you can configure a custom project directory (with a custom `tsconfig.json` file) using `ngcArgs: "--project ./your/custom/path"`.   |
-| `ngccArgs` | `string` | Optional arguments to pass to the `ngcc` CLI. For example, you can configure a custom project directory (with a custom `tsconfig.json` file) using `ngcArgs: "--tsconfig ./your/custom/path"`. |
+| Name   |   Type   | Description                                                                                                                                                                               |
+| :----- | :------: | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `args` | `string` | Optional arguments to pass to the `ngc` CLI. For example, you can configure a custom project directory (with a custom `tsconfig.json` file) using `args: "--project ./your/custom/path"`. |

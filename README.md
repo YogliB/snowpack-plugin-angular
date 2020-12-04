@@ -2,7 +2,7 @@
 
 This plugin lets you use [Angular](https://angular.io) with [Snowpack](https://snowpack.dev).
 
-When developing or building your site with Snowpack, this plugin will run Angular's `ngc` CLI in your project and pipe the output through Snowpack.
+When developing or building your site with Snowpack, this plugin will run Angular's [`ngc`](https://angular.io/guide/aot-compiler) CLI in your project and pipe the output through Snowpack.
 
 ## Usage
 

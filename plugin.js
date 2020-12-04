@@ -1,15 +1,14 @@
 const execa = require("execa");
 const npmRunPath = require("npm-run-path");
 const cwd = process.cwd();
-const fse = require("fs-extra");
 
-function angularPlugin(_, { ngcArgs, ngccArgs } = {}) {
+function angularPlugin(_, { args } = {}) {
   return {
     name: "snowpack-plugin-angular",
     async run({ isDev, log }) {
       // START run `ngc` in watch mode
       const workerPromise = execa.command(
-        `ngc ${ngcArgs || "--project ./tsconfig.app.json"} ${
+        `ngc ${args || "--project ./tsconfig.app.json"} ${
           isDev ? "--watch" : ""
         }`,
         {
@@ -33,45 +32,6 @@ function angularPlugin(_, { ngcArgs, ngccArgs } = {}) {
 
       stdout && stdout.on("data", dataListener);
       stderr && stderr.on("data", dataListener);
-      // END run `ngc` in watch mode
-
-      // run `ngcc`
-      execa.commandSync(
-        `ngcc ${ngccArgs || "--tsconfig ./tsconfig.app.json"}`,
-        {
-          cwd,
-          env: npmRunPath.env(),
-          extendEnv: true,
-          windowsHide: false,
-          stdio: "inherit",
-        }
-      );
-
-      // copy `ngcc`-processed files to `web_modules`
-      execa.commandSync("snowpack install", {
-        env: npmRunPath.env(),
-        extendEnv: true,
-        windowsHide: false,
-        cwd,
-        stdio: "inherit",
-      });
-
-      // move `web_modules` to `.cache` directory
-      const srcDir = "web_modules";
-      const destDir = `node_modules/.cache/snowpack/development`;
-
-      fse.rmdirSync(destDir, { recursive: true });
-      fse.copySync(srcDir, destDir);
-      fse.rmdirSync(srcDir, { recursive: true });
-
-      // run `ngc` once before --watch mode
-      execa.commandSync(`ngc ${ngcArgs || "--project ./tsconfig.app.json"}`, {
-        env: npmRunPath.env(),
-        extendEnv: true,
-        windowsHide: false,
-        cwd,
-        stdio: "inherit",
-      });
 
       return workerPromise;
     },

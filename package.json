@@ -1,6 +1,6 @@
 {
 	"dependencies": {
-		"execa": "4.1.0",
+		"execa": "5.0.0",
 		"npm-run-path": "4.0.1"
 	},
 	"homepage": "https://github.com/YogliB/snowpack-plugin-angular#readme",
@@ -25,7 +25,7 @@
 	"scripts": {
 		"format": "prettier . --write"
 	},
-	"version": "1.1.0",
+	"version": "1.2.0",
 	"devDependencies": {
 		"prettier": "^2.2.1",
 		"snowpack": "^3.0.10"

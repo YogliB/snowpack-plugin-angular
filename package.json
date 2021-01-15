@@ -27,7 +27,8 @@
 	},
 	"version": "1.1.0",
 	"devDependencies": {
-		"prettier": "^2.2.1"
+		"prettier": "^2.2.1",
+		"snowpack": "^3.0.10"
 	},
 	"keywords": [
 		"snowpack",

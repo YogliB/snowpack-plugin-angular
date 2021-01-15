@@ -16,7 +16,7 @@ Then add the plugin to your Snowpack config:
 // snowpack.config.js
 
 module.exports = {
-  plugins: ["snowpack-plugin-angular"],
+	plugins: ['snowpack-plugin-angular'],
 };
 ```
 

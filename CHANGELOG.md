@@ -9,41 +9,41 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
-- The user is now responsible for running `ngcc` before running `snowpack dev`.
-- `ngc` arguments are now passed through the `args` property.
+-   The user is now responsible for running `ngcc` before running `snowpack dev`.
+-   `ngc` arguments are now passed through the `args` property.
 
 ## [0.0.8] - 2020-12-2
 
 ### Changed
 
-- Fixed `web_modules` install process.
+-   Fixed `web_modules` install process.
 
 ## [0.0.5] - 2020-12-2
 
 ### Changed
 
-- Added missing `fs-extra` to dependencies.
+-   Added missing `fs-extra` to dependencies.
 
 ## [0.0.4] - 2020-12-2
 
 ### Added
 
-- Move installed `web_modules` to `.cache` folder.
+-   Move installed `web_modules` to `.cache` folder.
 
 ## [0.0.3] - 2020-12-2
 
 ### Added
 
-- Run `snowpack install` after running `ngcc` to update `web_modules`.
+-   Run `snowpack install` after running `ngcc` to update `web_modules`.
 
 ## [0.0.2] - 2020-11-30
 
 ### Changed
 
-- Made `ngc` run once before going to watch mode.
+-   Made `ngc` run once before going to watch mode.
 
 ## [0.0.1] - 2020-11-30
 
 ### Added
 
-- Basic Angular support for Snowpack.
+-   Basic Angular support for Snowpack.

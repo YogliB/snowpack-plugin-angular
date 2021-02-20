@@ -51,7 +51,7 @@ function angularPlugin(_, { args } = {}) {
 				buildOptimizer,
 			} = require('@angular-devkit/build-optimizer');
 
-			const transpiledContent = buildOptimizer({ content: input })
+			const transpiledContent = buildOptimizer({ content: contents })
 				.content;
 
 			return transpiledContent.trim() || contents;

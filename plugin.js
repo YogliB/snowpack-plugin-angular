@@ -25,7 +25,7 @@ function runNgcc(log) {
 	if (stderr && stderr.trim()) dataListener(stderr, log);
 }
 
-function runNgc(log) {
+function runNgc(args, log) {
 	const { stdout, stderr } = commandSync(
 		`ngc ${args || '--project ./tsconfig.app.json'}`,
 		{
@@ -49,7 +49,7 @@ function angularPlugin(_, { args } = {}) {
 		async run({ isDev, log }) {
 			if (existsSync(`${cwd}/node_modules/.bin/ngcc`)) runNgcc(log);
 
-			if (isDev) runNgc(log);
+			if (isDev) runNgc(args, log);
 
 			const workerPromise = command(
 				`ngc ${args || '--project ./tsconfig.app.json'} ${

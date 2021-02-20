@@ -3,7 +3,10 @@ const npmRunPath = require('npm-run-path');
 const cwd = process.cwd();
 
 function angularPlugin(_, { args } = {}) {
-	return {
+	/**
+	 * @type {import('snowpack').SnowpackPlugin}
+	 */
+	const plugin = {
 		name: 'snowpack-plugin-angular',
 		async run({ isDev, log }) {
 			// START run `ngc` in watch mode
@@ -40,7 +43,22 @@ function angularPlugin(_, { args } = {}) {
 
 			return workerPromise;
 		},
+		transform({ contents, fileExt, isDev }) {
+			if (isDev || fileExt.trim() !== '.js' || !contents.trim())
+				return contents;
+
+			const {
+				buildOptimizer,
+			} = require('@angular-devkit/build-optimizer');
+
+			const transpiledContent = buildOptimizer({ content: input })
+				.content;
+
+			return transpiledContent.trim() || contents;
+		},
 	};
+
+	return plugin;
 }
 
 module.exports = angularPlugin;

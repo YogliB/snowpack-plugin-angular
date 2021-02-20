@@ -17,6 +17,7 @@
 	"main": "plugin.js",
 	"name": "snowpack-plugin-angular",
 	"peerDependencies": {
+		"@angular-devkit/build-optimizer": "~0.1102.0",
 		"@angular/compiler-cli": "^11.0.0",
 		"snowpack": ">= 2 <= 3"
 	},
@@ -35,5 +36,5 @@
 	"scripts": {
 		"format": "prettier . --write"
 	},
-	"version": "1.3.0"
+	"version": "2.0.0"
 }

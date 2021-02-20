@@ -1,6 +1,7 @@
-const execa = require('execa');
+const { command, commandSync } = require('execa');
 const npmRunPath = require('npm-run-path');
 const cwd = process.cwd();
+const { access } = require('fs/promises');
 
 function angularPlugin(_, { args } = {}) {
 	/**
@@ -9,20 +10,6 @@ function angularPlugin(_, { args } = {}) {
 	const plugin = {
 		name: 'snowpack-plugin-angular',
 		async run({ isDev, log }) {
-			// START run `ngc` in watch mode
-			const workerPromise = execa.command(
-				`ngc ${args || '--project ./tsconfig.app.json'} ${
-					isDev ? '--watch' : ''
-				}`,
-				{
-					env: npmRunPath.env(),
-					extendEnv: true,
-					windowsHide: false,
-					cwd,
-				}
-			);
-			const { stdout, stderr } = workerPromise;
-
 			function dataListener(chunk) {
 				let stdOutput = chunk.toString();
 				// In --watch mode, handle the "clear" character
@@ -35,8 +22,34 @@ function angularPlugin(_, { args } = {}) {
 						.replace(/\x1Bc/, '')
 						.replace(/\u001bc/, '');
 				}
-				log('WORKER_MSG', { level: 'log', msg: stdOutput });
+				log('WORKER_MSG', { level: 'log', msg: `${stdOutput}` });
 			}
+
+			if (await access('./node_modules/.bin/ngcc')) {
+				let { stdout, stderr } = commandSync('ngcc', {
+					env: npmRunPath.env(),
+					extendEnv: true,
+					windowsHide: false,
+					cwd,
+				});
+
+				if (stdout && stdout.trim()) dataListener(stdout);
+				if (stderr && stderr.trim()) dataListener(stderr);
+			}
+
+			// START run `ngc` in watch mode
+			const workerPromise = command(
+				`ngc ${args || '--project ./tsconfig.app.json'} ${
+					isDev ? '--watch' : ''
+				}`,
+				{
+					env: npmRunPath.env(),
+					extendEnv: true,
+					windowsHide: false,
+					cwd,
+				}
+			);
+			({ stdout, stderr } = workerPromise);
 
 			stdout && stdout.on('data', dataListener);
 			stderr && stderr.on('data', dataListener);
@@ -54,7 +67,7 @@ function angularPlugin(_, { args } = {}) {
 			const transpiledContent = buildOptimizer({ content: contents })
 				.content;
 
-			return transpiledContent.trim() || contents;
+			return transpiledContent || contents;
 		},
 	};
 

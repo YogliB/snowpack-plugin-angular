@@ -1,7 +1,6 @@
 const { command, commandSync } = require('execa');
 const { env } = require('npm-run-path');
 const cwd = process.cwd();
-const { existsSync } = require('fs');
 
 function dataListener(chunk, log) {
 	let stdOutput = chunk.toString();
@@ -11,18 +10,6 @@ function dataListener(chunk, log) {
 		stdOutput = stdOutput.replace(/\x1Bc/, '').replace(/\u001bc/, '');
 	}
 	log('WORKER_MSG', { level: 'log', msg: `${stdOutput}` });
-}
-
-function runNgcc(log) {
-	const { stdout, stderr } = commandSync('ngcc', {
-		env: env(),
-		extendEnv: true,
-		windowsHide: false,
-		cwd,
-	});
-
-	if (stdout && stdout.trim()) dataListener(stdout, log);
-	if (stderr && stderr.trim()) dataListener(stderr, log);
 }
 
 function runNgc(args, log) {
@@ -47,8 +34,6 @@ function angularPlugin(_, { args } = {}) {
 	const plugin = {
 		name: 'snowpack-plugin-angular',
 		async run({ isDev, log }) {
-			if (existsSync(`${cwd}/node_modules/.bin/ngcc`)) runNgcc(log);
-
 			if (isDev) runNgc(args, log);
 
 			const workerPromise = command(

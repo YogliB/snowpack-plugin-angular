@@ -2,7 +2,7 @@
 
 -   This plugin is best used with [snowpack-template-angular](https://github.com/YogliB/snowpack-template-angular)
 
-[![Contributor Covenant](https://img.shields.io/badge/Contributor%20Covenant-v1.4%20adopted-ff69b4.svg)](code-of-conduct.md)
+[![Contributor Covenant](https://img.shields.io/badge/Contributor%20Covenant-v1.4%20adopted-ff69b4.svg)](CODE-OF-CONDUCT.md)
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](http://makeapullrequest.com)
 [![npm package version](https://badgen.net/npm/v/snowpack-plugin-angular)](https://npm.im/snowpack-plugin-angular)
 [![install size](https://badgen.net/packagephobia/install/snowpack-plugin-angular)](https://packagephobia.now.sh/result?p=snowpack-plugin-angular)

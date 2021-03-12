@@ -1,3 +1,7 @@
+# Moved
+
+This plugin has been moved and is now managed at the [snowpack-angular](https://github.com/YogliB/snowpack-angular/tree/main/packages/plugin) monorepo. Please update your dependencies. This repository is no longer maintained.
+
 # snowpack-plugin-angular
 
 -   This plugin is best used with [snowpack-template-angular](https://github.com/YogliB/snowpack-template-angular)

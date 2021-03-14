@@ -1,6 +1,6 @@
-# Moved
+# Migration In Progress
 
-This plugin has been moved and is now managed at the [snowpack-angular](https://github.com/YogliB/snowpack-angular/tree/main/packages/plugin) monorepo. Please update your dependencies. This repository is no longer maintained.
+This plugin is beening moved to the official Snowpack repository, and will eventually be updated with a different npm package.
 
 # snowpack-plugin-angular
 
